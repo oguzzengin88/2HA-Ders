@@ -21,14 +21,16 @@ namespace ECommerce.Service
 
             categoryService.AddSeedData();
             productService.AddSeedData();
-            productService.GetAll();
-            productService.Create();
+            //productService.Delete();
             productService.GetAll();
             //productService.Create();
             //productService.GetAll();
-            //productService.Update();
+            productService.Update();
+            productService.GetAll();
+
             //productService.GetAll();
-            //productService.Delete();
+            //productService.Create();
+            //productService.GetAll();
             //productService.GetAll();
 
         }

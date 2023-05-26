@@ -65,10 +65,7 @@ namespace ECommerce.Service
             //var categoryList = _database.Categories.ToList();
 
 
-            foreach (var category in _database.Categories)
-            {
-                Console.WriteLine($"{category.Id} - {category.Name}");
-            }
+            GetCategories();
             Console.Write("Ürünün kategorisini seçin: ");
 
             product.CategoryId = int.Parse(Console.ReadLine());
@@ -97,8 +94,32 @@ namespace ECommerce.Service
             Console.Write("Ürünün yeni stok adedini girin: ");
             productToUpdate.Stock = int.Parse(Console.ReadLine());
 
+            GetCategories();
+            Console.WriteLine("Ürünün yeni kategorisini girin: ");
+            productToUpdate.CategoryId = int.Parse(Console.ReadLine());
+
+            /*
+             *  Kategoriler: 
+                1 - Bilgisayarlar
+                2 - Telefonlar
+                3 - Kulaklıklar
+                Ürünün yeni kategorisini seçin:  1
+
+            GetAll()
+             * */
+
+
+
             _database.Products.Update(productToUpdate);
             _database.SaveChanges();
+        }
+
+        public void GetCategories()
+        {
+            foreach (var category in _database.Categories)
+            {
+                Console.WriteLine($"{category.Id} - {category.Name}");
+            }
         }
 
         //CRUD (Create, Read, Update, Delete)
