@@ -15,18 +15,21 @@ namespace ECommerce.Service
         public void Run()
         {
             Database database = new Database();
+            CategoryService categoryService = new CategoryService(database);
             ProductService productService = new ProductService(database);
 
 
-            productService.AddFakeData();
-            //productService.Create(database);
-            //productService.GetAll(database);
-            //productService.Create(database);
-            //productService.GetAll(database);
-            productService.Update();
+            categoryService.AddSeedData();
+            productService.AddSeedData();
             productService.GetAll();
-            productService.Delete();
+            productService.Create();
             productService.GetAll();
+            //productService.Create();
+            //productService.GetAll();
+            //productService.Update();
+            //productService.GetAll();
+            //productService.Delete();
+            //productService.GetAll();
 
         }
 

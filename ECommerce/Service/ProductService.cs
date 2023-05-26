@@ -14,7 +14,7 @@ namespace ECommerce.Service
         #region Ödev
         /*
 
-        Görev: Create, Update, Delete ve GetAll metotlarını bu çıktıyı verecek şekilde refacor et.
+        Görev: Create, Update, Delete ve GetAll metotlarını bu çıktıyı verecek şekilde refactor et.
 
 
         Ürün adını girin: Asus Bilgisayar
@@ -59,6 +59,20 @@ namespace ECommerce.Service
 
             Console.Write("Ürünün stok adedini girin: ");
             product.Stock = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Kategoriler");
+
+            //var categoryList = _database.Categories.ToList();
+
+
+            foreach (var category in _database.Categories)
+            {
+                Console.WriteLine($"{category.Id} - {category.Name}");
+            }
+            Console.Write("Ürünün kategorisini seçin: ");
+
+            product.CategoryId = int.Parse(Console.ReadLine());
+
 
             _database.Products.Add(product);
             _database.SaveChanges();
@@ -110,12 +124,13 @@ namespace ECommerce.Service
         }
 
         //Seed ekleme
-        public void AddFakeData()
+        public void AddSeedData()
         {
-            _database.Products.Add(new Product() { Name="Asus Bilgisayar", CategoryId = 1, Price=20000, Stock=15 });
-            _database.Products.Add(new Product() { Name="Lenovo Bilgisayar", CategoryId = 1, Price =15000, Stock=20 });
+            _database.Products.Add(new Product() { Name="Asus Bilgisayar", CategoryId = 3, Price=20000, Stock=15 });
+            _database.Products.Add(new Product() { Name="Lenovo Bilgisayar", CategoryId = 3, Price =15000, Stock=20 });
             _database.Products.Add(new Product() { Name="Apple Telefon", CategoryId = 2, Price =23000, Stock=30 });
             _database.Products.Add(new Product() { Name="Samsung Telefon", CategoryId = 2, Price =27000, Stock=25 });
+            _database.Products.Add(new Product() { Name="Kulaklık", CategoryId = 1, Price =500, Stock=100 });
             _database.SaveChanges();
         }
 
@@ -124,12 +139,13 @@ namespace ECommerce.Service
         {
             List<Product> liste = new List<Product>();
 
-            liste = _database.Products.ToList();
+            liste = _database.Products.OrderBy(p=>p.Id).ToList();
 
             foreach (var product in liste)
             {
-                Console.WriteLine($"{product.Id} - Ürün adı: {product.Name} Fiyat: {product.Price} ({product.Stock})");
+                Console.WriteLine($"{product.Id} - {product.Name} / {product.Category.Name} - {product.Price} - {product.Stock}");
 
+                //1 - Asus Bilgisayar / Bilgisayarlar - 25000 - 30
                 //Console.WriteLine(product.Id + "- Ürün Adı: " + product.Name + " Fiyat: " + product.Price + "(" + product.Stock + ")");
             }
         }

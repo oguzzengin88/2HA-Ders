@@ -51,7 +51,7 @@ namespace ECommerce.Service
         }
 
 
-        public void AddFakeData()
+        public void AddSeedData()
         {
             Category category1 = new Category() { Id = 1, Name = "Elektronik", Description = "Elektronik Kategorisi" };
             Category category2 = new Category() { Id = 2, Name = "Telefon", Description = "Telefon Kategorisi" };
